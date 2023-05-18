@@ -27,7 +27,13 @@ const appendItem = (task) => {
   div.appendChild(header);
   div.appendChild(p);
 
-  container.appendChild(div);
+  if (task.IsComplete) {
+    div.classList.add("completed");
+    moveTask(div);
+  } else {
+    div.onclick = () => completeTask(task.Id); //if click on this div will be marked as complete
+    container.appendChild(div);
+  }
 };
 
 const handleSubmit = (event) => {
@@ -59,4 +65,24 @@ const handleSubmit = (event) => {
     .catch((err) => console.error(err));
 
   event.target.reset(); //reset the form so can't just keep hitting add new task
+};
+
+const completeTask = (taskId) => {
+  const div = document.getElementById(taskId);
+
+  fetch(URL, {
+    method: "PUT",
+    mode: "cors",
+    body: JSON.stringify({ taskId }),
+  }).then((response) => {
+    if (response.ok) {
+      div.classList.add("completed");
+      moveTask(div); //passing div to moveTask element
+    }
+  });
+};
+
+const moveTask = (div) => {
+  const newParent = document.getElementById("completed-tasks-container");
+  newParent.appendChild(div); //appending to the completed tasks container
 };

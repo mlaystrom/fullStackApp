@@ -59,13 +59,22 @@ public class WebServer
 
              switch (request.HttpMethod)
              {
-                case "GET":
+            case "GET":
                 // Handle Get Requests
                      HandleGetRequests(request, response);
                 break;
-                case "POST":
+            case "POST":
                 // Handle POST requests
                     HandlePostRequests(request, response);
+                break;
+            case "PUT":
+                HandlePutRequests(request, response);
+                break;
+            case "OPTIONS":
+                HandleOptionsRequests(response);  //gives permission to Options
+                break;
+            default:
+                SendResponse(response, HttpStatusCode.NotFound, null);
                 break;
              }
         }
@@ -123,6 +132,36 @@ public class WebServer
             SendResponse(response, HttpStatusCode.BadRequest, error);
 
         }
+    }
+
+    private void HandlePutRequests(HttpListenerRequest req, HttpListenerResponse res) //take in response and request parameters
+    {
+        if ( req.HasEntityBody)
+        {
+            CompleteTaskRequest? body = JsonSerializer.Deserialize<CompleteTaskRequest>(req.InputStream);  //takes the stream of data and it turns into the complete task request
+           
+            
+        
+            bool result = _taskRepository.MarkTaskAsComplete(body?.TaskId ?? 0);//if body doesn't have an Id, return 0
+            
+            HttpStatusCode code = result ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
+            SendResponse(res, code, null);
+        
+        }
+        else
+        {
+            string errorMessage= "Could not update task";
+            Console.WriteLine(errorMessage);
+            ErrorResponse error = new ErrorResponse(errorMessage);
+            SendResponse(res, HttpStatusCode.BadRequest, error);
+        }
+    }
+
+    //REsponse to an OPTIONS request and allows all CORS methods
+    private void HandleOptionsRequests(HttpListenerResponse res)
+    {
+        res.AddHeader("Access-Control-Allow-Methods", "*");
+        SendResponse(res, HttpStatusCode.OK, null);
     }
 
     private void SendResponse(HttpListenerResponse response, HttpStatusCode statusCode, object? data)

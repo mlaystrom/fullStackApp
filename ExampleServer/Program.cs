@@ -25,9 +25,10 @@ var task3 = new TaskModel("Task 3", "The third task");
 //declaring type on lefthand side
 TaskModel task4 = new("Task 4", "The fourth task");
 
+//commented out because didn't want them to be marked as complete on webpage
 
-task1.IsComplete = true; //the bool in TaskModel.cs and then the var task = repo.GetTasksByStatus(true) returns those that are true
-task4.IsComplete = true;
+//task1.IsComplete = true; //the bool in TaskModel.cs and then the var task = repo.GetTasksByStatus(true) returns those that are true
+//task4.IsComplete = true;
 
 //initialize task repo
 TaskRepository repo = new TaskRepository();

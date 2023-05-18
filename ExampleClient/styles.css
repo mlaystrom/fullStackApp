@@ -1,5 +1,6 @@
 /* Id of task-container*/
-#task-container {
+#task-container,
+#completed-tasks-container {
   width: 1000px;
   max-width: 90vw;
   margin: 1rem auto 0;
@@ -16,9 +17,15 @@
   background-color: rgb(192, 179, 179);
   padding: 0.5rem;
 }
+
+.task.completed {
+  text-decoration: line-through;
+}
+
 .task > h3 {
   margin: 0;
 }
+
 .task > p {
   margin: 0.25 rem 0;
 }
