@@ -6,6 +6,7 @@ using System.Net;//HttpListener (ctrl + . wrote this using statement)
 using System.Text; //Encoding.UTF8
 using System.Text.Json;
 using ExampleServer.Data; //where we are getting _taskRepository from
+using ExampleServer.Models;
 
 namespace ExampleServer.Server;
 
@@ -58,9 +59,13 @@ public class WebServer
 
              switch (request.HttpMethod)
              {
-                case "Get":
+                case "GET":
                 // Handle Get Requests
-                HandleGetRequests(request, response);
+                     HandleGetRequests(request, response);
+                break;
+                case "POST":
+                // Handle POST requests
+                    HandlePostRequests(request, response);
                 break;
              }
         }
@@ -81,7 +86,44 @@ public class WebServer
     }
 
 
+    private void HandlePostRequests(HttpListenerRequest request, HttpListenerResponse response)
+    {
+        // Check that the request has a body
+        if(request.HasEntityBody)
+        {
+            //Deserialize our request body from JSON to the c# request type
+            TaskCreateRequest? body = JsonSerializer.Deserialize<TaskCreateRequest>(request.InputStream);
 
+            // Check to make sure it is not null
+            if (body !=null)
+            {
+                // Create the new TaskModel
+                TaskModel newTask = new TaskModel(body.Title ?? "Title", body.Description ?? "");
+
+                //Add that task to our repository
+                _taskRepository.AddTask(newTask); //adding to the field
+
+
+                //Create a response message
+                string logOutput =$"Added new item: #{newTask.Id}: {newTask.Title}"; //logged to server
+                Console.WriteLine(logOutput);
+
+                //Send the response
+
+            SendResponse(response, HttpStatusCode.Created, newTask); //sending the response back to the client
+            }
+        }
+        else
+        {
+            //if our POST request does not have entity body
+            string errorMessage = "Failed to add task as there was no request body.";
+            Console.WriteLine(errorMessage);
+
+            ErrorResponse error = new ErrorResponse (errorMessage);
+            SendResponse(response, HttpStatusCode.BadRequest, error);
+
+        }
+    }
 
     private void SendResponse(HttpListenerResponse response, HttpStatusCode statusCode, object? data)
     {   

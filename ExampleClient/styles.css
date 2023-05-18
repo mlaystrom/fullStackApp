@@ -1,0 +1,24 @@
+/* Id of task-container*/
+#task-container {
+  width: 1000px;
+  max-width: 90vw;
+  margin: 1rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /*places them in center first*/
+}
+/*class of task*/
+.task {
+  box-sizing: border-box;
+  width: calc(33.33333% - 0.5rem);
+  border: solid 1px rgb(65, 62, 62);
+  margin-bottom: 0.5rem;
+  background-color: rgb(192, 179, 179);
+  padding: 0.5rem;
+}
+.task > h3 {
+  margin: 0;
+}
+.task > p {
+  margin: 0.25 rem 0;
+}
