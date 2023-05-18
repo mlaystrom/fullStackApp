@@ -1,3 +1,50 @@
+body {
+  font-family: "Work Sans", sans-serif;
+  background: #d3d6db;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 81px;
+  text-align: center;
+  color: #57385c;
+}
+h2 {
+  font-size: 32px;
+  text-align: center;
+  color: #57385c;
+}
+form {
+  width: 1000px;
+  max-width: 470px;
+  margin: 50px auto 20px;
+  padding: 40px 30px 25px 30px;
+  border-radius: 15px;
+  background: #be3144;
+}
+input {
+  display: flex;
+  margin: 0 auto;
+  width: 250px;
+  padding: 10px;
+  border-radius: 15px;
+}
+button {
+  display: flex;
+  margin: 20px auto;
+  width: 50px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+button:hover {
+  color: #d3d6db;
+  background: #303841;
+}
+
 /* Id of task-container*/
 #task-container,
 #completed-tasks-container {
@@ -14,12 +61,15 @@
   width: calc(33.33333% - 0.5rem);
   border: solid 1px rgb(65, 62, 62);
   margin-bottom: 0.5rem;
-  background-color: rgb(192, 179, 179);
+  background-color: #303841;
   padding: 0.5rem;
+  color: #d3d6db;
 }
 
 .task.completed {
   text-decoration: line-through;
+  background-color: #303841;
+  color: #d3d6db;
 }
 
 .task > h3 {

@@ -6,25 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task List Client</title>
     <link rel="stylesheet" href="./styles.css" />
+    <script
+      src="https://kit.fontawesome.com/27fb428e89.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Source+Sans+Pro&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body onload="getData()">
-    <h1>My Task List</h1>
+    <h1>My Task List <i class="fa-solid fa-list-check"></i></h1>
 
-    <div>
+    <div id="taskForm">
       <form onsubmit="handleSubmit(event)">
-        <input type="text" name="title" placeholder="Enter title..." required />
         <input
           type="text"
+          id="title-input"
+          name="title"
+          placeholder="Enter title..."
+          required
+        />
+        <input
+          type="text"
+          id="description-input"
           name="description"
           placeholder="Enter description..."
         />
-        <button type="submit">Add New Task</button>
+        <button type="submit">ADD</button>
       </form>
     </div>
-    <h2>Incomplete Tasks</h2>
+    <h2>Incomplete Tasks <i class="fa-solid fa-thumbtack"></i></h2>
     <div id="task-container"></div>
 
-    <h2>Completed Tasks</h2>
+    <h2>Completed Tasks <i class="fa-regular fa-thumbs-up"></i></h2>
     <div id="completed-tasks-container"></div>
 
     <script src="./script.js"></script>
