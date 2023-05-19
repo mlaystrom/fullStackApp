@@ -85,4 +85,21 @@ const completeTask = (taskId) => {
 const moveTask = (div) => {
   const newParent = document.getElementById("completed-tasks-container");
   newParent.appendChild(div); //appending to the completed tasks container
+  div.onclick = () => deleteTask(div); //next time you click it, it will be deleted
+};
+
+const deleteTask = (taskEl) => {
+  const deleteUrl = `${URL}${taskEl.id}`; //giving us the id from div taskEl and placing on end of url
+  console.log(deleteUrl);
+
+  //sending a delete request to server
+  fetch(deleteUrl, {
+    method: "DELETE",
+    mode: "cors",
+  }).then((res) => {
+    console.log(res);
+    if (res.ok) {
+      taskEl.remove(); //telling taskEl to be removed from the page
+    }
+  });
 };

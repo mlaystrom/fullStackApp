@@ -1,6 +1,9 @@
 body {
+  padding: 0;
+  margin: 0;
   font-family: "Work Sans", sans-serif;
-  background: #d3d6db;
+  background-image: url("../ExampleServer/Assets/marjan-blan-paper-unsplash.jpg");
+  background-color: #d3d6db;
 }
 
 h1 {
@@ -13,21 +16,23 @@ h2 {
   font-size: 32px;
   text-align: center;
   color: #57385c;
+  line-height: 1.2;
 }
 form {
   width: 1000px;
-  max-width: 470px;
+  max-width: 510px;
   margin: 50px auto 20px;
   padding: 40px 30px 25px 30px;
   border-radius: 15px;
   background: #be3144;
+  box-shadow: 15px 10px 32px -9px rgba(0, 0, 0, 0.23);
 }
 input {
   display: flex;
   margin: 0 auto;
   width: 250px;
   padding: 10px;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 button {
   display: flex;
@@ -35,10 +40,7 @@ button {
   width: 50px;
   padding: 5px 10px;
   cursor: pointer;
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
+  box-shadow: 15px 10px 32px -9px rgba(0, 0, 0, 0.23);
 }
 button:hover {
   color: #d3d6db;
@@ -64,18 +66,23 @@ button:hover {
   background-color: #303841;
   padding: 0.5rem;
   color: #d3d6db;
+  box-shadow: 15px 10px 32px -9px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
 }
 
 .task.completed {
   text-decoration: line-through;
   background-color: #303841;
   color: #d3d6db;
+  box-shadow: 15px 10px 32px -9px rgba(0, 0, 0, 0.23);
 }
 
 .task > h3 {
   margin: 0;
+  text-align: center;
 }
 
 .task > p {
   margin: 0.25 rem 0;
+  text-align: center;
 }

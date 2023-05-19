@@ -70,6 +70,9 @@ public class WebServer
             case "PUT":
                 HandlePutRequests(request, response);
                 break;
+            case "DELETE":
+                HandleDeleteRequests(request, response);
+                break;
             case "OPTIONS":
                 HandleOptionsRequests(response);  //gives permission to Options
                 break;
@@ -154,6 +157,29 @@ public class WebServer
             Console.WriteLine(errorMessage);
             ErrorResponse error = new ErrorResponse(errorMessage);
             SendResponse(res, HttpStatusCode.BadRequest, error);
+        }
+    }
+
+    // Handling DELETE Requests
+
+    private void HandleDeleteRequests(HttpListenerRequest req, HttpListenerResponse res)
+    {
+        string? idSegment = req.Url?.Segments.Last();
+        int taskId = int.Parse(idSegment ?? "-1"); //string to int and where taskID is declared
+
+        bool deleteResult = _taskRepository.DeleteTaskById(taskId); //true false on if deleted or not
+
+        if (deleteResult)
+        {
+            string outputMessage = $"Removed task #{taskId}";
+            Console.WriteLine(outputMessage);
+            SendResponse(res, HttpStatusCode.OK, null);//the 200 status code thing
+        }
+        else
+        {
+            string errorMessage = $"Failed to remove task #{taskId}";
+            Console.WriteLine(errorMessage);
+            SendResponse(res, HttpStatusCode.BadRequest, new ErrorResponse(errorMessage)); //the 400 status thing
         }
     }
 
